@@ -1,5 +1,4 @@
 
-
     // MODELO DE DATOS
 
     let mis_peliculas_iniciales = [
@@ -27,11 +26,18 @@
     }
     const getAPI = async () => {
         // Completar: Llamar a la API para leer la información guardada en myjson a través de la API
+        try {
+            const res = await fetch(localStorage.URL);
+            return res.json();
+        } catch (e) {
+            alert("Error al leer la información guardada.")
+        }
 
         
     }
     const updateAPI = async (peliculas) => {
         // Completar: Actualizar la información a través de la API
+        
     }
 
 
