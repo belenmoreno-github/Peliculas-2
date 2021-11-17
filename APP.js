@@ -37,7 +37,18 @@
     }
     const updateAPI = async (peliculas) => {
         // Completar: Actualizar la información a través de la API
-        
+        try {
+            await fetch(localStorage.URL, {
+                method: "PUT",
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(peliculas)});
+
+        } catch(e) {
+            alert("Ha habido un error");
+            return;
+        }
     }
 
 
