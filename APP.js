@@ -133,7 +133,29 @@
         // ...
 
         return `<h2>Crear Película</h2>
+                <h3>Introducir nueva película: </h3>
+
+                <div class="field">
+                Título <br>
+                <input  type="text" id="titulo" placeholder="Título"
+                value="">
+                </div>
+                <div class="field">
+                Director <br>
+                <input  type="text" id="director" placeholder="Director" 
+                value="">
+                </div>
+                <div class="field">
+                Miniatura <br>
+                <input  type="text" id="miniatura" placeholder="URL de la miniatura"
+                value=""> 
+            
+                </div>
+
+
+
             <div class="actions">
+                <button class="create">crear</button>
                 <button class="index">Volver</button>
             </div>`;
     }
@@ -155,16 +177,22 @@
 
     const showContr = (i) => {
         // Completar: controlador que muestra la vista showView()
-        let pelicula = JSON.parse(localStorage.mis_peliculas)[i];
-        document.getElementById('main').innerHTML = showView(pelicula);
+        document.getElementById('main').innerHTML = showView(mis_peliculas[i]);
     }
 
     const newContr = () => {
         // Completar: controlador que muestra la vista newView()
+        document.getElementById('main').innerHTML = newView();
     }
 
     const createContr = async () => {
         // Completar: controlador que crea una película nueva en el modelo guardado en myjson
+        let titulo2 = document.getElementById('titulo').value;
+        let director2 = document.getElementById('director').value;
+        let miniatura2 = document.getElementById('miniatura').value;
+        mis_peliculas.push({titulo: titulo2, director: director2, miniatura: miniatura2});
+        await updateAPI(mis_peliculas);
+        indexContr();
     }
 
     const editContr = (i) => {
@@ -182,6 +210,7 @@
     const deleteContr = async (i) => {
         // Completar:  controlador que actualiza el modelo borrando la película seleccionada
         // Genera diálogo de confirmación: botón Aceptar devuelve true, Cancel false
+
     }
 
     const resetContr = async () => {
@@ -197,10 +226,10 @@
         else if (matchEvent(ev, '.edit'))   editContr   (myId(ev));
         else if (matchEvent(ev, '.update')) updateContr (myId(ev));
         else if (matchEvent(ev, '.show'))  showContr (myId(ev));
-        else if (matchEvent(ev, '.new')) newContr (myId(ev));
-        else if (matchEvent(ev, '.create')) createContr (myId(ev));
+        else if (matchEvent(ev, '.new')) newContr ();
+        else if (matchEvent(ev, '.create')) createContr ();
         else if (matchEvent(ev, '.delete')) deleteContr (myId(ev));
-        else if (matchEvent(ev, '.reset')) resetContr (myId(ev));
+        else if (matchEvent(ev, '.reset')) resetContr ();
     })
     
     
