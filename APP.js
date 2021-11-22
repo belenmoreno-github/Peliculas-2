@@ -113,10 +113,15 @@
         // ...
 
         return `
+            <div class="field">
+            Información:
+            </div>
             <p>
-            
+            La película <b> ${pelicula.titulo} </b> 
+            fue dirigida por <b> ${pelicula.director} </b> !
             
             </p>
+
             <div class="actions">
             <button class="index">Volver</button>
             </div>`;
