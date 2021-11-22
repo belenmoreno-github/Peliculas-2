@@ -219,6 +219,8 @@
 
     const resetContr = async () => {
         // Completar:  controlador que reinicia el modelo guardado en myjson con las películas originales
+        await updateAPI(mis_peliculas_iniciales);
+        await indexContr();
     }
 
     // ROUTER de eventos
