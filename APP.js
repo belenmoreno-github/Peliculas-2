@@ -210,7 +210,11 @@
     const deleteContr = async (i) => {
         // Completar:  controlador que actualiza el modelo borrando la película seleccionada
         // Genera diálogo de confirmación: botón Aceptar devuelve true, Cancel false
-
+        if (confirm(`¿Seguro que quiere eliminar la película ${mis_peliculas[i].titulo} ?`)) {
+            mis_peliculas.splice(i, 1);
+            await updateAPI(mis_peliculas);
+            await indexContr();
+        }
     }
 
     const resetContr = async () => {
