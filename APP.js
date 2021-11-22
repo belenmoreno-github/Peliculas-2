@@ -38,7 +38,7 @@
     const updateAPI = async (peliculas) => {
         // Completar: Actualizar la información a través de la API
         try {
-            await fetch(localStorage.URL, {
+            const res = await fetch(localStorage.URL, {
                 method: "PUT",
                 headers:{
                     "Content-Type": "application/json",
@@ -68,14 +68,17 @@
                     ${peliculas[i].titulo || "<em>Sin título</em>"}
                 </div>
                 <div class="actions">
+                    <button class="show" data-my-id="${i}">ver</button>
                     <button class="edit" data-my-id="${i}">editar</button>
+                    <button class="delete" data-my-id="${i}">borrar</button>
                 </div>
             </div>\n`;
             i = i + 1;
         };
 
         view += `<div class="actions">
-                    <!--Insertar aquí botones de "Añadir" y "Reset"-->
+                    <button class="new" data-my-id="${i}">añadir</button>
+                    <button class="reset" data-my-id="${i}">reset</button>
                 </div>`;
 
         return view;
@@ -113,18 +116,16 @@
         // ...
 
         return `
-            <div class="field">
             Información:
             </div>
-            <p>
-            La película <b> ${pelicula.titulo} </b> 
-            fue dirigida por <b> ${pelicula.director} </b> !
-            
-            </p>
+                <p>
+                La película <b> ${pelicula.titulo} </b> 
+                fue dirigida por <b> ${pelicula.director} </b> !
+                
+                </p>
 
-            <div class="actions">
-            <button class="index">Volver</button>
-            </div>`;
+                <div class="actions">
+                <button class="index">Volver</button>`;
     }
 
     const newView = () => {
@@ -154,6 +155,8 @@
 
     const showContr = (i) => {
         // Completar: controlador que muestra la vista showView()
+        let pelicula = JSON.parse(localStorage.mis_peliculas)[i];
+        document.getElementById('main').innerHTML = showView(pelicula);
     }
 
     const newContr = () => {
@@ -193,6 +196,11 @@
         if      (matchEvent(ev, '.index'))  indexContr  ();
         else if (matchEvent(ev, '.edit'))   editContr   (myId(ev));
         else if (matchEvent(ev, '.update')) updateContr (myId(ev));
+        else if (matchEvent(ev, '.show'))  showContr (myId(ev));
+        else if (matchEvent(ev, '.new')) newContr (myId(ev));
+        else if (matchEvent(ev, '.create')) createContr (myId(ev));
+        else if (matchEvent(ev, '.delete')) deleteContr (myId(ev));
+        else if (matchEvent(ev, '.reset')) resetContr (myId(ev));
     })
     
     
